@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -28,6 +29,19 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         return $product;
+    }
+
+    public function fillCart(Request $request)
+    {
+        Session::put('cart',[
+            $request->id => [
+                'qtd' => $request->qtd,
+                'val' => $request->val,
+                'total' => $request->total]
+        ]);
+
+        return Session::get('cart');
+        return true;
     }
 
 

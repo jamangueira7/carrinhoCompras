@@ -81,8 +81,8 @@
                                 </table>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                <button type="button" class="btn btn-primary">Adicionar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">Fechar</button>
+                                <button type="button" id="add" class="btn btn-primary">Adicionar</button>
                             </div>
                         </div>
                     </div>
@@ -100,9 +100,6 @@
 @endsection
 @section('scripts')
     <script>
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        });
 
         function fillModal(id){
             $.ajaxSetup({
@@ -115,12 +112,50 @@
                 type: 'POST',
                 data: id,
                 success: function (result) {
-                    $("#modalTable > tbody").append("<tr><td>"+result.name+"</td><td>R$" + result.price.toFixed(2).replace(".",",")+"</td><td><input id='movie' type='number' min='1' max='10' value='1'/></td><td></td></tr>");
+                    $("#modalTable > tbody").html("<tr>" +
+                        "<td>"+result.name +"<input id='id' type='hidden' value='"+result.id +"'></td>" +
+                        "<td id='val'>R$" + result.price.toFixed(2).replace(".",",")+"</td>" +
+                        "<td id='qtd'><input id='movie' onchange='calcTotal(this, "+result.price+")' type='number' min='1' max='10' value='1'/></td>" +
+                        "<td id='total' >R$" + result.price.toFixed(2).replace('.',',')+"</td>" +
+                        "</tr>");
                 },
                 error: function (errors) {
                     console.log(errors)
                 }
             });
         }
+
+        $('button#add').on('click', function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "fill-cart",
+                type: 'POST',
+                data: {
+                    id: $(this).parent().parent().find('#id').val(),
+                    qtd: $(this).parent().parent().find('#movie').val(),
+                    val: $(this).parent().parent().find('#val').text(),
+                    toal: $(this).parent().parent().find('#total').text(),
+                },
+                success: function (result) {
+                    console.log(result)
+                    $('#closeModal').click();
+                },
+                error: function (errors) {
+                    console.log(errors)
+                }
+            });
+        })
+
+        function calcTotal(target, val) {
+            if(target.value <= 10){
+                $('#myModal').html("R$" + (target.value * val).toFixed(2).replace('.',','))
+            }
+        }
+
+
     </script>
 @endsection

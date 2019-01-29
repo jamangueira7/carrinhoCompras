@@ -15,3 +15,4 @@ Route::get('/', 'ProductController@index');
 Route::get('product/{id}', 'ProductController@details');
 
 Route::post('fill-modal/{id}', 'ProductController@fillModal');
+Route::post('fill-cart', 'ProductController@fillCart');
