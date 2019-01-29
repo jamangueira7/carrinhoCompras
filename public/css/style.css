@@ -1,0 +1,62 @@
+body,html {
+    height: 100%;
+}
+
+body {
+    padding-top: 5px;
+}
+
+.wide {
+    width:100%;
+    height:20%;
+    height:calc(100% - 1px);
+    background-image:url(../img/header.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.wide img {
+    width:100%;
+}
+
+.logo {
+    color:#E14D43;
+    font-weight:800;
+    font-size:35pt;
+    padding:25px;
+    text-align:center;
+}
+
+.line {
+    padding-top:20px;
+    white-space:no-wrap;
+    overflow:hidden;
+    text-align:center;
+}
+
+.container2 {
+    position: absolute;
+    margin: 20px;
+    width: auto;
+}
+
+/* The navbar */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+/* Navbar links */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
