@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('products.index');
-});
+Route::get('/', 'ProductController@index');
+Route::get('product/{id}', 'ProductController@details');
+
+Route::post('fill-modal/{id}', 'ProductController@fillModal');

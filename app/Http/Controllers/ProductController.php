@@ -14,8 +14,22 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::with('category')->paginate(12);
+
+        return view('products/index', compact('products'));
     }
+
+    public function details($id)
+    {
+        $product = Product::with('category')->find($id);
+        return view('products/product', compact('product'));
+    }
+    public function fillModal($id)
+    {
+        $product = Product::find($id);
+        return $product;
+    }
+
 
     /**
      * Show the form for creating a new resource.

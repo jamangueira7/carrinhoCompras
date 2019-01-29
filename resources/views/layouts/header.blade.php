@@ -9,8 +9,8 @@
     <link href="{{URL::asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('/css/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('/css/fontawesome/release/v5.6.3/css/all.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('/css/style.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{URL::asset('img/shopping.ico')}}" >
-    @yield('css')
 </head>
 <body>
 
@@ -30,8 +30,12 @@
     <div class="col-xs-2 logo">Loja X</div>
 </div>
 
-
-
+@yield('content')
+<script src="{{URL::asset('/js/jquery.min.js')}}"></script>
+<script src="{{URL::asset('/js/bootstrap.js')}}"></script>
+<script src="{{URL::asset('/js/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('/js/datatables/dataTables.bootstrap.min.js')}}"></script>
+@yield('scripts')
 <script>
     $(function() {
         /*Tooltip*/
@@ -82,3 +86,5 @@
         });
     });
 </script>
+</body>
+</html>

@@ -13,4 +13,9 @@ class Product extends Model
         'qtd', 'image', 'category_id'
     ];
     protected $guarded = ['id', 'created_at', 'update_at'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

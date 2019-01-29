@@ -11,5 +11,10 @@ class Category extends Model
     ];
 
     protected $guarded = ['id', 'created_at', 'update_at'];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
 
