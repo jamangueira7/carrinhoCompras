@@ -30,18 +30,45 @@ class ProductController extends Controller
         $product = Product::find($id);
         return $product;
     }
-
+    public function fillCart2(Request $request)
+    {
+        $session = Session::get('cart');
+        $new = Array(
+            'id' => $request->id,
+            'qtd' => $request->qtd,
+            'val' => $request->val,
+            'total' => $request->total);
+dd($session, $new);
+        if(!empty($session)){
+            array_push($session, $new);
+            Session::put('cart',[
+                $session
+            ]);
+        }else{
+            Session::put('cart',[
+                $new
+            ]);
+        }
+        return Session::get('cart');
+    }
     public function fillCart(Request $request)
     {
-        Session::put('cart',[
-            $request->id => [
-                'qtd' => $request->qtd,
-                'val' => $request->val,
-                'total' => $request->total]
-        ]);
+        $session = Session::get('cart');
+        $new = Array(
+            'id' => $request->id,
+            'qtd' => $request->qtd,
+            'val' => $request->val,
+            'total' => $request->total);
 
+        if(!empty($session)){
+            array_push($session, $new);
+            Session::put('cart', $session);
+        }else{
+            Session::flush();
+            $request->session()->flush();
+            Session::put('cart', [$new]);
+        }
         return Session::get('cart');
-        return true;
     }
 
 

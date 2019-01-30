@@ -18,10 +18,9 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container2">
         <div class="topnav">
-            <a href="#home">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+            <a href="{{url('/')}}">Home</a>
+            <a href="{{url('/login')}}">Logar</a>
+            <a href="{{url('/cart')}}"><img src="{{URL::asset('/img/shopping-cart.png')}}" alt="Smiley face" height="20" width="20"> Card</a>
         </div>
     </div>
 </div>

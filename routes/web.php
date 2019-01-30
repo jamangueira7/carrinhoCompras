@@ -16,3 +16,8 @@ Route::get('product/{id}', 'ProductController@details');
 
 Route::post('fill-modal/{id}', 'ProductController@fillModal');
 Route::post('fill-cart', 'ProductController@fillCart');
+Route::get('fill-cart2', 'ProductController@fillCart2');
+
+Route::get('/cart', 'CardController@index');
+Route::get('/shopping', 'CardController@shopping');
+Route::get('/login', 'UserController@login');

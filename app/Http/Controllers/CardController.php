@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CardController extends Controller
 {
@@ -14,8 +16,28 @@ class CardController extends Controller
      */
     public function index()
     {
-        //
+        $cart = Session::get('cart');
+        $total = 0;
+        foreach ($cart as $key => $c){
+            $cart[$key]['name'] = Product::find($c['id'])['name'];
+            $val = intval(explode('R$',$c['total'])[1]);
+            $total += $val;
+        }
+        return view('cart/index', compact('cart', 'total'));
     }
+    public function shopping()
+    {
+        $cart = Session::get('cart');
+
+        $total = 0;
+        foreach ($cart as $key => $c){
+            $cart[$key]['name'] = Product::find($c['id'])['name'];
+            $val = intval(explode('R$',$c['total'])[1]);
+            $total += $val;
+        }
+        return view('cart/index', compact('cart', 'total'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

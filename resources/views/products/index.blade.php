@@ -102,6 +102,7 @@
     <script>
 
         function fillModal(id){
+            $("#modalTable > tbody").html("");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -138,7 +139,7 @@
                     id: $(this).parent().parent().find('#id').val(),
                     qtd: $(this).parent().parent().find('#movie').val(),
                     val: $(this).parent().parent().find('#val').text(),
-                    toal: $(this).parent().parent().find('#total').text(),
+                    total: $(this).parent().parent().find('#total').text(),
                 },
                 success: function (result) {
                     console.log(result)
@@ -152,7 +153,7 @@
 
         function calcTotal(target, val) {
             if(target.value <= 10){
-                $('#myModal').html("R$" + (target.value * val).toFixed(2).replace('.',','))
+                $('#total').html("R$" + (target.value * val).toFixed(2).replace('.',','))
             }
         }
 
